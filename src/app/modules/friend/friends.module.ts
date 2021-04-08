@@ -6,18 +6,18 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { TagInputModule } from 'ngx-chips';
 
 import { MaterialModule } from '../../app.module';
-import { GamesRoutes } from './games.routing';
+import { FriendsRoutes } from './friends.routing';
 
-import { GameListComponent } from './gamelist/gamelist.component';
-import { GameCreateComponent } from './gamecreate/gamecreate.component';
-import { GameEditComponent } from './gameedit/gameedit.component';
+import { FriendListComponent } from './friendlist/friendlist.component';
+import { FriendCreateComponent } from './friendcreate/friendcreate.component';
+import { FriendEditComponent } from './friendedit/friendedit.component';
 
-import { GamesService } from './games.service';
+import { FriendsService } from './friends.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(GamesRoutes),
+    RouterModule.forChild(FriendsRoutes),
     FormsModule,
     ReactiveFormsModule,
     NouisliderModule,
@@ -25,13 +25,13 @@ import { GamesService } from './games.service';
     MaterialModule
   ],
   declarations: [
-    GameListComponent,
-    GameCreateComponent,
-    GameEditComponent
+    FriendListComponent,
+    FriendCreateComponent,
+    FriendEditComponent
   ],
   providers: [
-    GamesService
+    FriendsService
   ]
 })
 
-export class GamesModule {}
+export class FriendsModule {}

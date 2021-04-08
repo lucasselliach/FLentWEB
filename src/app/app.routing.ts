@@ -35,7 +35,11 @@ export const AppRoutes: Routes =
             {
                 path: '',
                 loadChildren: './modules/game/games.module#GamesModule'
-            }    
+            },
+            {
+                path: '',
+                loadChildren: './modules/friend/friends.module#FriendsModule'
+            }       
         ]
     } 
 ];

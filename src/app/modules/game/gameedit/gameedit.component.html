@@ -1,0 +1,48 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+        
+            <div class="col-md-12">
+                <div class="card ">
+                    <form [formGroup]="formGroup" class="form-horizontal">
+                        <div class="card-header card-header-rose card-header-text">
+                            <div class="card-text">
+                                <h4 class="card-title">Editar jogo</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" *ngIf="listaDeErrosDoDominio.length > 0">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-danger">
+                                    <h3>Opa! Alguma coisa não deu certo:</h3>
+                                    <ul>
+                                        <li *ngFor="let errosDoDominio of listaDeErrosDoDominio"> {{ errosDoDominio.property }} : {{errosDoDominio.message}}</li>
+                                    </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Nome</label>
+                                <div class="col-sm-7">
+                                    <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':nameEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'name')">
+                                        <input type="text" matInput id="Nome" (ngModelChange)="nameValidation($event)" formControlName="name">
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('required')">Nome da jogo é inválido. Informe o name.</mat-error>                                      
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('minlength')">Nome da jogo deve conter no mínimo 2 caracteres.</mat-error>                                      
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('maxlength')">Nome da jogo deve conter no maximo 100 caracteres.</mat-error>                                                                          
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="card-footer text-center">
+                            <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="formGroupOnClick()">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+       
+        </div>
+    </div>
+</div>
+      

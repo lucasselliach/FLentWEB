@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
 
 import { GameListComponent } from './gamelist/gamelist.component';
-// import { ClienteCriarComponent } from './clientecriar/clientecriar.component';
-// import { ClienteDetalharComponent } from './clientedetalhar/clientedetalhar.component';
-// import { ClienteEditarComponent } from './clienteeditar/clienteeditar.component';
+import { GameCreateComponent } from './gamecreate/gamecreate.component';
+import { GameEditComponent } from './gameedit/gameedit.component';
 
 export const GamesRoutes: Routes = [
     {
@@ -15,35 +14,25 @@ export const GamesRoutes: Routes = [
                 component: GameListComponent
             }
         ]
+    },
+    {
+        path: '',
+        children: 
+        [ 
+            {
+                path: 'gamecreate',
+                component: GameCreateComponent
+            }
+        ]
+    },
+    {
+        path: '',
+        children: 
+        [ 
+            {
+                path: 'gameedit/:gameid',
+                component: GameEditComponent
+            }
+        ]
     }
-    // {
-    //     path: '',
-    //     children: 
-    //     [ 
-    //         {
-    //             path: 'clientecriar',
-    //             component: ClienteCriarComponent
-    //         }
-    //     ]
-    // },
-    // {
-    //     path: '',
-    //     children: 
-    //     [ 
-    //         {
-    //             path: 'clientedetalhar/:codigo',
-    //             component: ClienteDetalharComponent
-    //         }
-    //     ]
-    // },
-    // {
-    //     path: '',
-    //     children: 
-    //     [ 
-    //         {
-    //             path: 'clienteeditar/:codigo',
-    //             component: ClienteEditarComponent
-    //         }
-    //     ]
-    // }
 ];

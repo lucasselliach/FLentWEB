@@ -8,7 +8,7 @@
                         <div class="card-icon"> 
                             <i class="material-icons">assignment</i> 
                         </div>        
-                        <h4 class="card-title ">Jogos</h4>
+                        <h4 class="card-title ">Amigos</h4>
                     </div>
                     <div class="card-body">
                         <div class="toolbar">
@@ -19,27 +19,33 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
+                                        <th>Apelido</th>
                                         <th>Data Cadastro</th>
-                                        <th>Emprestado</th>
+                                        <th>Telefone</th>
+                                        <th>Email</th>
                                         <th class="disabled-sorting text-right">Opções</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Nome</th>
+                                        <th>Apelido</th>
                                         <th>Data Cadastro</th>
-                                        <th>Emprestado</th>
+                                        <th>Telefone</th>
+                                        <th>Email</th>
                                         <th class="text-right">opções</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr *ngFor="let game of gameList">
-                                        <td>{{ game.name }}</td>
-                                        <td>{{ game.registerDate | date: 'dd/MM/yyyy' }}</td>
-                                        <td>{{ game.lent }}</td>
+                                    <tr *ngFor="let friend of friendList">
+                                        <td>{{ friend.name }}</td>
+                                        <td>{{ friend.nickName }}</td>
+                                        <td>{{ friend.registerDate | date: 'dd/MM/yyyy' }}</td>
+                                        <td>{{ friend.phoneNumber01.value }}</td>
+                                        <td>{{ friend.email.value }}</td>
                                         <td class="text-right">
-                                        <a class="btn btn-link btn-warning btn-just-icon" [routerLink]="['/gameedit', game?.id]"><i class="material-icons">edit</i></a>
-                                        <a class="btn btn-link btn-danger btn-just-icon" (click)="deleteOnClick(game)"><i class="material-icons">delete</i></a>
+                                        <a class="btn btn-link btn-warning btn-just-icon" [routerLink]="['/friendedit', friend?.id]"><i class="material-icons">edit</i></a>
+                                        <a class="btn btn-link btn-danger btn-just-icon" (click)="deleteOnClick(friend)"><i class="material-icons">delete</i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -47,7 +53,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button mat-raised-button type="button" class="btn btn-fill btn-rose" [routerLink]="['/gamecreate']">Criar Jogo</button>
+                        <button mat-raised-button type="button" class="btn btn-fill btn-rose" [routerLink]="['/friendcreate']">Criar amigo</button>
                     </div>
                 </div>  
             </div>

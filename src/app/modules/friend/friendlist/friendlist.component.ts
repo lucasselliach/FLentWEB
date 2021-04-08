@@ -2,33 +2,33 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 
 import sweetalert2 from 'sweetalert2';
 
-import { GamesModel } from '../games.model';
+import { FriendsModel } from '../friends.model';
 import { DomainNotificationModel } from "../../../shared/models/domainnotification.model";
 
-import { GamesService } from '../games.service';
+import { FriendsService } from '../friends.service';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
 declare const $: any;
 
 @Component({
-    selector: 'app-game-list-cmp',
-    templateUrl: 'gamelist.component.html'
+    selector: 'app-friend-list-cmp',
+    templateUrl: 'friendlist.component.html'
 })
 
-export class GameListComponent implements OnInit {
-    public gameList: GamesModel[];
+export class FriendListComponent implements OnInit {
+    public friendList: FriendsModel[];
         
     public errorMessage: string = "";
     public listaDeErrosDoDominio: DomainNotificationModel[] = [];
 
-    constructor(private gamesService: GamesService, private spinner: NgxSpinnerService, private chRef: ChangeDetectorRef) {}
+    constructor(private friendsService: FriendsService, private spinner: NgxSpinnerService, private chRef: ChangeDetectorRef) {}
 
     ngOnInit() {
         
         this.spinner.show();   
         
-        this.gamesService.getGames()
+        this.friendsService.getFriends()
         .subscribe(
           result => { this.getOnComplete(result)},
           error => { this.getOnError(error)}
@@ -41,7 +41,7 @@ export class GameListComponent implements OnInit {
         if(response.success === false){
             this.listaDeErrosDoDominio = response.data;
         }else{
-            this.gameList = response.data;        
+            this.friendList = response.data;        
             this.loadTableInformation(response.data);
         }
 
@@ -55,11 +55,11 @@ export class GameListComponent implements OnInit {
     }
 
 
-    deleteOnClick(game: GamesModel){
+    deleteOnClick(friend: FriendsModel){
         
         sweetalert2({
-            title: 'Excluir esse jogo?',
-            text: "A exclusão será permanente",
+            title: 'Excluir esse amigo?',
+            text: "A exclusão será permanente!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonClass: 'btn btn-success',
@@ -70,9 +70,9 @@ export class GameListComponent implements OnInit {
             if (result.value) {
                 this.spinner.hide();   
           
-                this.gamesService.deleteGame(game.id)
+                this.friendsService.deleteFriend(friend.id)
                 .subscribe(
-                result => { this.deleteOnComplete(result, game)},
+                result => { this.deleteOnComplete(result, friend)},
                 error => { this.deleteOnError(error)}
                 );
                 
@@ -80,8 +80,8 @@ export class GameListComponent implements OnInit {
 
                 sweetalert2(
                 {
-                  title: 'Jogo excluido!',
-                  text: 'Seu jogo está eliminado.',
+                  title: 'Amigo excluido!',
+                  text: 'Seu amigo está eliminado.',
                   type: 'success',
                   confirmButtonClass: "btn btn-success",
                   buttonsStyling: false
@@ -91,13 +91,13 @@ export class GameListComponent implements OnInit {
         })   
     }
 
-    deleteOnComplete(response: any, game: GamesModel){
+    deleteOnComplete(response: any, friend: FriendsModel){
         this.errorMessage = "";
 
         if(response.success === false){
             this.listaDeErrosDoDominio = response.data;
         }else{
-            this.gameList.splice(this.gameList.indexOf(game), 1);
+            this.friendList.splice(this.friendList.indexOf(friend), 1);
         }
     }
     
@@ -105,8 +105,7 @@ export class GameListComponent implements OnInit {
         this.errorMessage = response; 
         console.error(response);
     }
-    
-    
+        
     loadTableInformation(data: any){
         
         this.chRef.detectChanges();

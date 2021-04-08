@@ -5,3 +5,12 @@ export class GamesModel {
     public lent: string;
     public userId: string;
 }
+
+export class GamesCreateModel {
+    public name: string;
+}
+
+export class GamesEditModel {
+    public id: string;
+    public name: string;
+}
