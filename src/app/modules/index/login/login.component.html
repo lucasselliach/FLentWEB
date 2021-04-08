@@ -1,0 +1,72 @@
+<div class="wrapper wrapper-full-page">
+        <div class="page-header login-page header-filter" filter-color="rose" style="background-image: url('./assets/img/login.jpg'); background-size: cover; background-position: top center;">
+        <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+        <!-- <div class="container">
+          <div class="row" *ngIf="listaDeErrosDoDominio.length > 0">
+            <div class="col-sm-12">
+                <div class="alert alert-danger">
+                <h3>Opa! Alguma coisa não deu certo:</h3>
+                <ul>
+                    <li *ngFor="let errosDoDominio of listaDeErrosDoDominio"> {{ errosDoDominio.key }} : {{errosDoDominio.value}}</li>
+                </ul>
+                </div>
+            </div>
+          </div>  
+        </div>  
+         -->
+        <div class="container">
+            <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+              <form class="form" [formGroup]="angularForm" (ngSubmit)="onSubmit()" novalidate>
+                <div class="card card-login card-hidden">
+                  <div class="card-header card-header-rose text-center">
+                    <h4 class="card-title">AMIGOS X JOGOS</h4>  
+                  </div>
+                  <div class="card-body">
+                    <span class="bmd-form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">email</i>
+                          </span>
+                        </div>
+                        <input type="email" class="form-control" placeholder="Email de usuario" formControlName="login" required>
+                        <div class="form-control-feedback" *ngIf="login.errors && (login.dirty || login.touched)">
+                          <p *ngIf="login.errors.required">Informe o e-mail</p>
+                          <p *ngIf="login.errors.pattern">Email é invalido</p>
+                        </div>
+                      </div>
+                    </span>
+                    <span class="bmd-form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">lock_outline</i>
+                          </span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Password do usuário" formControlName="password" required>
+                        <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+                            <p *ngIf="password.errors.required">Informe a senha</p>
+                            <p *ngIf="password.errors.minLength">A senha deve possuir no mínimo 6 caracteres</p>
+                            <p *ngIf="password.errors.maxLength">A senha deve possuir no maximo 16 caracteres</p>
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+                  <div class="card-footer justify-content-center">
+                    <button type="submit" class="btn btn-rose btn-link btn-lg" [disabled]='!angularForm.valid'>Login</button >
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <footer class="footer ">
+            <!-- <div class="container">
+              <p class="pull-right" *ngIf="!webserviceStatus">WebService está offline</p>
+              <p class="pull-left" *ngIf="!databaseStatus">/DataBase está offline</p>
+            </div> -->
+          </footer>
+      
+        </div>
+      </div>
+      

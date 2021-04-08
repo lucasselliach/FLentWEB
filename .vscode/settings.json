@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/dfc76475-a13f-4ab7-bdc7-31af4a0919f7/resourceGroups/General/providers/Microsoft.Web/sites/sgwhotel",
+    "appService.deploySubpath": "."
+}
