@@ -33,69 +33,41 @@
                       </div>
                   </div>
                   <div class="col-md-5 mr-auto">
-                      
-                    <form class="form" [formGroup]="angularForm" (ngSubmit)="onSubmit()" novalidate>
-                      
-                      <div class="form-group has-default">
+                    <form class="form" [formGroup]="formGroup" (ngSubmit)="onSubmit()" novalidate>
+                      <div class="form-group">
                         <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">
-                              <i class="material-icons">face</i>
-                            </span>
-                          </div>
-                          <input type="text" class="form-control" placeholder="Nome..." formControlName="name" required>
-                          <div class="form-control-feedback" *ngIf="name.errors && (name.dirty || name.touched)">
-                            <p *ngIf="name.errors.required">Informe o e-mail</p>
-                            <p *ngIf="name.errors.pattern">Email é invalido</p>
-                          </div>
+                          <mat-form-field class="example-full-width" [ngClass]="{'has-success':nameEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'name')">
+                            <input type="text" matInput id="Nome" (ngModelChange)="nameValidation($event)" placeholder="Nome" formControlName="name">
+                            <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('required')">Nome é inválido. Informe o name.</mat-error>                                      
+                            <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('minlength')">Nome deve conter no mínimo 2 caracteres.</mat-error>                                      
+                            <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('maxlength')">Nome deve conter no maximo 100 caracteres.</mat-error>
+                          </mat-form-field>
                         </div>
                       </div>
-
-                      <!-- <div class="row">
-                        <label class="col-sm-2 col-form-label">Nome</label>
-                        <div class="col-sm-7">
-                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':nameEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'name')">
-                                <input type="text" matInput id="Nome" (ngModelChange)="nameValidation($event)" formControlName="name">
-                                <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('required')">Nome do amigo é inválido. Informe o name.</mat-error>                                      
-                                <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('minlength')">Nome do amigo deve conter no mínimo 2 caracteres.</mat-error>                                      
-                                <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('maxlength')">Nome do amigo deve conter no maximo 100 caracteres.</mat-error>                                                                          
-                            </mat-form-field>
-                        </div>
-                      </div> -->
-
-
-
-                      <div class="form-group has-default">
+                      <div class="form-group">
                         <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">
-                              <i class="material-icons">mail</i>
-                            </span>
-                          </div>
-                            <input type="email" class="form-control" placeholder="Email de usuario" formControlName="login" required>
-                            <div class="form-control-feedback" *ngIf="login.errors && (login.dirty || login.touched)">
-                            <p *ngIf="login.errors.required">Informe o e-mail</p>
-                            <p *ngIf="login.errors.pattern">Email é invalido</p>
-                            </div>
+                          <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':loginEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'login')">
+                            <input type="text" matInput id="Login" (ngModelChange)="loginValidation($event)" placeholder="Email..." formControlName="login">
+                            <mat-error *ngIf="isFieldValid(formGroup, 'login') && formGroup.controls['login'].hasError('required')">Email é inválido. Informe o login.</mat-error>                                      
+                            <mat-error *ngIf="isFieldValid(formGroup, 'login') && formGroup.controls['login'].hasError('minlength')">Email deve conter no mínimo 6 caracteres.</mat-error>                                      
+                            <mat-error *ngIf="isFieldValid(formGroup, 'login') && formGroup.controls['login'].hasError('maxlength')">Email deve conter no maximo 100 caracteres.</mat-error>                                                                        
+                            <mat-error *ngIf="isFieldValid(formGroup, 'login') && formGroup.controls['login'].hasError('pattern')">Email está em um formato <strong>incorreto</strong>. Exemplo: ciclano@provedor.com</mat-error>                                                                        
+                          </mat-form-field>
                         </div>
                       </div>
-                      <div class="form-group has-default">
+                      <div class="form-group">
                         <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">
-                              <i class="material-icons">lock_outline</i>
-                            </span>
-                          </div>
-                          <input type="password" class="form-control" placeholder="Password do usuário" formControlName="password" required>
-                          <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
-                              <p *ngIf="password.errors.required">Informe a senha</p>
-                              <p *ngIf="password.errors.minLength">A senha deve possuir no mínimo 6 caracteres</p>
-                              <p *ngIf="password.errors.maxLength">A senha deve possuir no maximo 16 caracteres</p>
-                          </div>
+                          <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':passwordEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'password')">
+                            <input type="password" matInput id="Password" (ngModelChange)="passwordValidation($event)" placeholder="Senha..." formControlName="password">
+                            <mat-error *ngIf="isFieldValid(formGroup, 'password') && formGroup.controls['password'].hasError('required')">Senha é inválido. Informe o password.</mat-error>                                      
+                            <mat-error *ngIf="isFieldValid(formGroup, 'password') && formGroup.controls['password'].hasError('minlength')">Senha deve conter no mínimo 6 caracteres.</mat-error>                                      
+                            <mat-error *ngIf="isFieldValid(formGroup, 'password') && formGroup.controls['password'].hasError('maxlength')">Senha deve conter no maximo 20 caracteres.</mat-error>                                                                          
+                          </mat-form-field>
                         </div>
                       </div>
+                      <br>
                       <div class="text-center">
-                        <button type="submit" class="btn btn-rose btn-link btn-lg">Cadastrar</button >
+                        <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="formGroupOnClick()">Cadastrar</button>
                       </div>
                     </form>
                   </div>

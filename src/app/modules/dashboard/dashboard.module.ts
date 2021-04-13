@@ -14,6 +14,11 @@ import { NgxGalleryModule } from 'ngx-gallery';
 
 import { DashboardComponent } from './dashboard.component';
 
+import { LendsService } from './../lend/lends.service';
+import { GamesService } from './../game/games.service';
+import { FriendsService } from './../friend/friends.service';
+
+
 @NgModule({
     imports: [
         CommonModule,
@@ -30,7 +35,9 @@ import { DashboardComponent } from './dashboard.component';
         DashboardComponent
     ],
     providers: [
-        
+        LendsService,
+        GamesService,
+        FriendsService
     ]
 })
 

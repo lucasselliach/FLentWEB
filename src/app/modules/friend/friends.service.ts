@@ -34,6 +34,14 @@ export class FriendsService extends ServiceBase {
       .map((res: Response) => <FriendModel>res.json())
       .catch(super.serviceError);
   }
+  
+  getFriendsCount() : Observable<string> {
+    let options = this.usuarioLogadoService.getAuthHeader();
+
+    return this.http.get(this.UrlServiceV1 + this.endPoint + "/getCount", options)
+      .map((res: Response) => <string>res.json())
+      .catch(super.serviceError);
+  }
 
   postFriend(friendsCreateModel: FriendsCreateModel) : Observable<string> {
     let options = this.usuarioLogadoService.getAuthHeader();

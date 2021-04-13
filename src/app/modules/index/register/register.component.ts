@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { RegisterUserService } from './register.service';
 import { RegisterModel } from './register.model';
 
+import { DomainNotificationModel } from "./../../../shared/models/domainnotification.model";
+
 declare var $: any;
 
 @Component({
@@ -16,18 +18,19 @@ declare var $: any;
 export class RegisterComponent implements OnInit, OnDestroy {
     test: Date = new Date();
         
-    public angularForm: FormGroup;
-    public name: FormControl;
-    public login: FormControl;
-    public password: FormControl;
-    
+    public formGroup: FormGroup;
+
+    public nameEhValido: boolean = false;
+    public loginEhValido: boolean = false;
+    public passwordEhValido: boolean = false;
+
     public registerModel: RegisterModel;
 
     public errorMessage: string = "";
+    public listaDeErrosDoDominio: DomainNotificationModel[] = [];  
 
-    constructor(private element: ElementRef, private router: Router, private registerUserService: RegisterUserService) {
 
-        
+    constructor(private formBuilder: FormBuilder, private element: ElementRef, private router: Router, private registerUserService: RegisterUserService) {
         this.registerModel = new RegisterModel();
     }
     
@@ -36,8 +39,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
       body.classList.add('register-page');
       body.classList.add('off-canvas-sidebar');
 
-      this.createFormControls();
-      this.createForm();
+      this.formGroup = this.formBuilder.group({
+            name: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+            login: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(100), Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+            password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
+        });
     }
 
     ngOnDestroy(){
@@ -46,65 +52,94 @@ export class RegisterComponent implements OnInit, OnDestroy {
       body.classList.remove('off-canvas-sidebar');
     }    
 
-    createFormControls() {
-        this.name = new FormControl('', [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(100)
-        ]);
-        this.login = new FormControl('', [
-            Validators.required,
-            Validators.pattern("[^ @]*@[^ @]*")
-        ]);
-        this.password = new FormControl('', [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(16)
-        ]);
-    }
-    
-    createForm() {
-        this.angularForm = new FormGroup({
-            name: this.name,
-            login: this.login,
-            password: this.password
-        });
-    }
+    formGroupOnClick() {
+        if (this.formGroup.valid) {
 
-    onSubmit() {
-        if (this.angularForm.valid) {
-            let objeto = Object.assign({}, this.registerModel, this.angularForm.value);
+            let objeto = Object.assign({}, this.registerModel, this.formGroup.value);
 
             this.registerUserService.postRegister(objeto)
-            .subscribe(
-            result => { this.onSubmitComplete(result) },
-            error => { this.OnSubmitError(error)}
-            );
+                .subscribe(
+                    result => { this.onSubmitComplete(result) },
+                    error => { this.OnSubmitError(error)}
+                );
+            
+        } else {
+            this.validateAllFormFields(this.formGroup);
         }
     }
-
-    onSubmitComplete(response: any) {
-        this.angularForm.reset();
+    
+    onSubmitComplete(response: any){ 
         this.errorMessage = "";
-         
-        console.log(response);
+        this.listaDeErrosDoDominio = [];
 
-        if(response.success === false){
+        if(response.success === false){          
             console.log(response);
+
+            this.listaDeErrosDoDominio = response.data;
             response.data.forEach(element => {
-                // this.showNotification('top','center', element.message)                
+                this.showNotification('top','center', element.message)                
             });
         }else{
             this.router.navigate(['/login']);
         }
     }
 
-    OnSubmitError(response: any){
+    OnSubmitError(response: any){    
         this.errorMessage = "";
+        this.listaDeErrosDoDominio = [];
         this.errorMessage = response; 
         console.error(response.data);
     }
+
+    //Validate Rules
+
+    nameValidation(e){
+        if (e) {
+            this.nameEhValido = true;
+        }else{
+            this.nameEhValido = false;
+        }
+    }
+
+    loginValidation(e){
+        if (e) {
+            this.loginEhValido = true;
+        }else{
+            this.loginEhValido = false;
+        }
+    }
     
+    passwordValidation(e){
+        if (e) {
+            this.passwordEhValido = true;
+        }else{
+            this.passwordEhValido = false;
+        }
+    }
+
+    //Validate Enginer
+
+    validateAllFormFields(formGroup: FormGroup) {
+        Object.keys(formGroup.controls).forEach(field => {
+        const control = formGroup.get(field);
+        if (control instanceof FormControl) {
+            control.markAsTouched({ onlySelf: true });
+        } else if (control instanceof FormGroup) {
+            this.validateAllFormFields(control);
+        }
+        });
+    }
+    
+    isFieldValid(form: FormGroup, field: string) {
+        return !form.get(field).valid && form.get(field).touched;
+    }
+
+    displayFieldCss(form: FormGroup, field: string) {
+        return {
+            'has-error': this.isFieldValid(form, field),
+            'has-feedback': this.isFieldValid(form, field)
+        };
+    }
     
     showNotification(from: any, align: any, messageShow: any) {
         const type = ['', 'info', 'success', 'warning', 'danger', 'rose', 'primary'];

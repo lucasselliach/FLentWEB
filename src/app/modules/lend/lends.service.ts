@@ -34,6 +34,14 @@ export class LendsService extends ServiceBase {
       .catch(super.serviceError);
   }
 
+  getLendsCount() : Observable<string> {
+    let options = this.usuarioLogadoService.getAuthHeader();
+
+    return this.http.get(this.UrlServiceV1 + this.endPoint + "/getCount", options)
+      .map((res: Response) => <string>res.json())
+      .catch(super.serviceError);
+  }
+
   postLend(lendsCreateModel: LendsCreateModel) : Observable<string> {
     let options = this.usuarioLogadoService.getAuthHeader();
                 

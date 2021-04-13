@@ -42,6 +42,14 @@ export class GamesService extends ServiceBase {
       .catch(super.serviceError);
   }
 
+  getGamesCount() : Observable<string> {
+    let options = this.usuarioLogadoService.getAuthHeader();
+
+    return this.http.get(this.UrlServiceV1 + this.endPoint + "/getCount", options)
+      .map((res: Response) => <string>res.json())
+      .catch(super.serviceError);
+  }
+
   postGame(gamesCreateModel: GamesCreateModel) : Observable<string> {
     let options = this.usuarioLogadoService.getAuthHeader();
 
