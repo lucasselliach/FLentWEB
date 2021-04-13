@@ -81,6 +81,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
+        console.log(this.angularForm);
+
         if (this.angularForm.valid) {
             let objeto = Object.assign({}, this.loginModel, this.angularForm.value);
 

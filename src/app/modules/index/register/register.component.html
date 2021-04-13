@@ -1,0 +1,112 @@
+
+<div class="wrapper wrapper-full-page">
+    <div class="page-header register-page header-filter" filter-color="black" style="background-image: url('./assets/img/register.jpg'); background-size: cover; background-position: top center;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 ml-auto mr-auto">
+            <div class="card card-signup">
+              <h2 class="card-title text-center">Registro</h2>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-5 ml-auto">
+                      <div class="info info-horizontal">
+                        <div class="icon icon-rose">
+                          <i class="material-icons">timeline</i>
+                        </div>
+                        <div class="description">
+                          <h4 class="info-title">Desafio</h4>
+                          <p class="description">
+                            Um pequeno desafio realizado na data de 04/2021 com o objetivo de mostrar meus conhecimentos com Angular e .Net Core
+                          </p>
+                        </div>
+                      </div>
+                      <div class="info info-horizontal">
+                        <div class="icon icon-info">
+                          <i class="material-icons">group</i>
+                        </div>
+                        <div class="description">
+                          <h4 class="info-title">Objetivo</h4>
+                          <p class="description">
+                              Seus amigos vivem pedindo seus jogos emprestados. Muitas vezes você quer jogar um jogo e não sabe com quem está. Pensando nisso, crie um sistema que você possa gerenciar os empréstimos dos seus jogos. O sistema deverá permitir a inserção/edição/exclusão de amigos e jogos, além de permitir o gerenciamento e visualização dos seus jogos, dos amigos e qual jogo está com quem..
+                          </p>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-5 mr-auto">
+                      
+                    <form class="form" [formGroup]="angularForm" (ngSubmit)="onSubmit()" novalidate>
+                      
+                      <div class="form-group has-default">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">face</i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Nome..." formControlName="name" required>
+                          <div class="form-control-feedback" *ngIf="name.errors && (name.dirty || name.touched)">
+                            <p *ngIf="name.errors.required">Informe o e-mail</p>
+                            <p *ngIf="name.errors.pattern">Email é invalido</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- <div class="row">
+                        <label class="col-sm-2 col-form-label">Nome</label>
+                        <div class="col-sm-7">
+                            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':nameEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'name')">
+                                <input type="text" matInput id="Nome" (ngModelChange)="nameValidation($event)" formControlName="name">
+                                <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('required')">Nome do amigo é inválido. Informe o name.</mat-error>                                      
+                                <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('minlength')">Nome do amigo deve conter no mínimo 2 caracteres.</mat-error>                                      
+                                <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('maxlength')">Nome do amigo deve conter no maximo 100 caracteres.</mat-error>                                                                          
+                            </mat-form-field>
+                        </div>
+                      </div> -->
+
+
+
+                      <div class="form-group has-default">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">mail</i>
+                            </span>
+                          </div>
+                            <input type="email" class="form-control" placeholder="Email de usuario" formControlName="login" required>
+                            <div class="form-control-feedback" *ngIf="login.errors && (login.dirty || login.touched)">
+                            <p *ngIf="login.errors.required">Informe o e-mail</p>
+                            <p *ngIf="login.errors.pattern">Email é invalido</p>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-group has-default">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">lock_outline</i>
+                            </span>
+                          </div>
+                          <input type="password" class="form-control" placeholder="Password do usuário" formControlName="password" required>
+                          <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+                              <p *ngIf="password.errors.required">Informe a senha</p>
+                              <p *ngIf="password.errors.minLength">A senha deve possuir no mínimo 6 caracteres</p>
+                              <p *ngIf="password.errors.maxLength">A senha deve possuir no maximo 16 caracteres</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-rose btn-link btn-lg">Cadastrar</button >
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer ">
+      </footer>
+    </div>
+  </div>
+  

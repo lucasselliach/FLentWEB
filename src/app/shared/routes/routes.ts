@@ -19,5 +19,11 @@ export const Routes: RouteInfo[] =
         title: 'Amigos',
         type: 'link',
         icontype: 'groups'
+    },
+    {
+        path: '/lendslist',
+        title: 'Empréstimos',
+        type: 'link',
+        icontype: 'perm_contact_calendar'
     }
 ];
