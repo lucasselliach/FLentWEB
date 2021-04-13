@@ -1,0 +1,112 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+        
+            <div class="col-md-12">
+                <div class="card ">
+                    <form [formGroup]="formGroup" class="form-horizontal">
+                        <div class="card-header card-header-rose card-header-text">
+                            <div class="card-text">
+                                <h4 class="card-title">Novo empréstimo</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" *ngIf="listaDeErrosDoDominio.length > 0">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-danger">
+                                    <h3>Opa! Alguma coisa não deu certo:</h3>
+                                    <ul>
+                                        <li *ngFor="let errosDoDominio of listaDeErrosDoDominio"> {{ errosDoDominio.property }} : {{errosDoDominio.message}}</li>
+                                    </ul>
+                                    </div>
+                                </div>
+                            </div>
+<!--                             
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Nome</label>
+                                <div class="col-sm-7">
+                                    <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':nameEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'name')">
+                                        <input type="text" matInput id="Nome" (ngModelChange)="nameValidation($event)" formControlName="name">
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('required')">Nome do amigo é inválido. Informe o name.</mat-error>                                      
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('minlength')">Nome do amigo deve conter no mínimo 2 caracteres.</mat-error>                                      
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'name') && formGroup.controls['name'].hasError('maxlength')">Nome do amigo deve conter no maximo 100 caracteres.</mat-error>                                                                          
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Apelido</label>
+                                <div class="col-sm-7">
+                                    <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':nickNameEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'nickName')">
+                                        <input type="text" matInput id="NickName" (ngModelChange)="nickNameValidation($event)" formControlName="nickName">
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'nickName') && formGroup.controls['nickName'].hasError('required')">Apelido do amigo é inválido. Informe o apelido.</mat-error>                                      
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'nickName') && formGroup.controls['nickName'].hasError('maxlength')">Apelido do amigo deve conter no maximo 40 caracteres.</mat-error>                                                                          
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-7">
+                                    <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':emailEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'email')">
+                                        <input type="text" matInput id="Email" (ngModelChange)="emailValidation($event)" formControlName="email">
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'email') && formGroup.controls['email'].hasError('required')">Email do amigo é inválido. Informe o email.</mat-error>                                      
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'email') && formGroup.controls['email'].hasError('minlength')">Email do amigo deve conter no mínimo 6 caracteres.</mat-error>                                      
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'email') && formGroup.controls['email'].hasError('maxlength')">Email do amigo deve conter no maximo 100 caracteres.</mat-error>                                                                        
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'email') && formGroup.controls['email'].hasError('pattern')">Email do amigo está em um formato <strong>incorreto</strong>. Exemplo: ciclano@provedor.com</mat-error>                                                                        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Telefone</label>
+                                <div class="col-sm-7">
+                                    <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':phoneNumber01EhValido===true}" [ngClass]="displayFieldCss(formGroup, 'phoneNumber01')">
+                                        <input type="text" matInput id="Telefone" (ngModelChange)="phoneNumber01Validation($event)" formControlName="phoneNumber01">
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'phoneNumber01') && formGroup.controls['phoneNumber01'].hasError('maxlength')">Telefone do amigo deve conter no maximo 20 caracteres.</mat-error>                                                                        
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'phoneNumber01') && formGroup.controls['phoneNumber01'].hasError('pattern')">Telefone ddo amigo está em um formato <strong>incorreto</strong>. Exemplo: (99) 9999-9999</mat-error>                                                                        
+                                    </mat-form-field>
+                                </div>
+                            </div> -->
+                        
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Jogos</label>
+                                <div class="col-sm-7">
+                                    <mat-form-field>
+                                        <mat-select [(value)]="initialValueGame" (selectionChange)="gameChanged($event.value)">
+                                            <mat-option *ngFor="let game of gameList" [value]="game">{{ game.name }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Amigos</label>
+                                <div class="col-sm-7">
+                                    <mat-form-field>
+                                        <mat-select [(value)]="initialValueFriend" (selectionChange)="friendChanged($event.value)">
+                                            <mat-option *ngFor="let friend of friendList" [value]="friend">{{ friend.name }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Data de devolução</label>
+                                <div class="col-sm-7">
+                                    <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':deadlineDateEhValido===true}" [ngClass]="displayFieldCss(formGroup, 'deadlineDate')">
+                                        <input matInput id="DeadlineDate" [min]="minDateDatePickerDeadlineDate" [max]="maxDateDatePickerDeadlineDate" (ngModelChange)="deadlineDateValidation($event)" [matDatepicker]="picker" (click)="picker.open()" formControlName="deadlineDate">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker startView="year" [startAt]="startDateDatePickerDeadlineDate"></mat-datepicker>
+                                        <mat-error *ngIf="isFieldValid(formGroup, 'deadlineDate') && formGroup.controls['deadlineDate'].hasError('required')">Data de nascimento da pessoa é inválido. Informe a data de nascimento .</mat-error>                                                                        
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        <div class="card-footer text-center">
+                            <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="formGroupOnClick()">Emprestar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+       
+        </div>
+    </div>
+</div>
+      

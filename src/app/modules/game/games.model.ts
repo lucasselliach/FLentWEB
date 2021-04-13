@@ -6,6 +6,14 @@ export class GamesModel {
     public userId: string;
 }
 
+export class GameModel {
+    public id: string;
+    public name: string;
+    public registerDate: string;
+    public lent: string;
+    public userId: string;
+}
+
 export class GamesCreateModel {
     public name: string;
 }

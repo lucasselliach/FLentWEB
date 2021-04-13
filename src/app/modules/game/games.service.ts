@@ -26,6 +26,14 @@ export class GamesService extends ServiceBase {
       .catch(super.serviceError);
   }
   
+  getGamesAvailable() : Observable<GamesModel> {
+    let options = this.usuarioLogadoService.getAuthHeader();
+
+    return this.http.get(this.UrlServiceV1 + this.endPoint + "/getAllAvailable", options)
+      .map((res: Response) => <GamesModel>res.json())
+      .catch(super.serviceError);
+  }
+  
   getGame(gameid: string) : Observable<GamesModel> {
     let options = this.usuarioLogadoService.getAuthHeader();
 

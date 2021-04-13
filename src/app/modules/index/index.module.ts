@@ -8,6 +8,8 @@ import { IndexRoutes } from './index.routing';
 
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
+import { RegisterComponent } from './register/register.component';
+import { RegisterUserService } from './register/register.service';
 
 @NgModule({
   imports: [
@@ -18,10 +20,12 @@ import { LoginService } from './login/login.service';
     ReactiveFormsModule
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ], 
   providers: [
-    LoginService
+    LoginService,
+    RegisterUserService
   ]
 })
 

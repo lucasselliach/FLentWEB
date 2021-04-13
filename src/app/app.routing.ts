@@ -39,7 +39,11 @@ export const AppRoutes: Routes =
             {
                 path: '',
                 loadChildren: './modules/friend/friends.module#FriendsModule'
-            }       
+            },
+            {
+                path: '',
+                loadChildren: './modules/lend/lends.module#LendsModule'
+            }            
         ]
     } 
 ];

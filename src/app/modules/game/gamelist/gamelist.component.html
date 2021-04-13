@@ -36,7 +36,7 @@
                                     <tr *ngFor="let game of gameList">
                                         <td>{{ game.name }}</td>
                                         <td>{{ game.registerDate | date: 'dd/MM/yyyy' }}</td>
-                                        <td>{{ game.lent }}</td>
+                                        <td>{{ game.lent  == true ? 'SIM' : 'NÃO' }} </td>
                                         <td class="text-right">
                                         <a class="btn btn-link btn-warning btn-just-icon" [routerLink]="['/gameedit', game?.id]"><i class="material-icons">edit</i></a>
                                         <a class="btn btn-link btn-danger btn-just-icon" (click)="deleteOnClick(game)"><i class="material-icons">delete</i></a>
